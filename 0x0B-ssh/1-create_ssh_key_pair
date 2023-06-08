@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
-# Creates RSA key pair
+# This script creates an RSA key pair if it doesn't already exist
 
-ssh-keygen -b 4096 -f school -t rsa -N betty
+key_path=~/.ssh/school
+
+if [[ -f "$key_path" ]]; then
+  echo "Key pair already exists. Skipping creation."
+else
+  ssh-keygen -t rsa -b 4096 -C "colemanjosephcarlis@gmail.com" -f "$key_path" -N "betty"
+fi
+
